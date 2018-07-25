@@ -4,11 +4,11 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.example</groupId>
-    <artifactId>dmsii-conn-demo</artifactId>
+    <artifactId>sqlserver-conn-demo</artifactId>
     <version>0.0.1</version>
     <packaging>jar</packaging>
 
-    <name>DMSII Connection Demo</name>
+    <name>SqlServer Connection Demo</name>
 
     <parent>
         <groupId>org.springframework.boot</groupId>

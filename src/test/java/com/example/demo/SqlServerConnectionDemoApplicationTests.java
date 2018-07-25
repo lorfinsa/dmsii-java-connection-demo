@@ -7,7 +7,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class DmsiiConnectionDemoApplicationTests {
+public class SqlServerConnectionDemoApplicationTests {
 
     @Test
     public void contextLoads() {

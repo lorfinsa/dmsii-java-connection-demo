@@ -9,10 +9,10 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
 
 @SpringBootApplication
-public class DmsiiConnectionDemoApplication {
+public class SqlServerConnectionDemoApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(DmsiiConnectionDemoApplication.class, args);
+        SpringApplication.run(SqlServerConnectionDemoApplication.class, args);
     }
 
     @Component
