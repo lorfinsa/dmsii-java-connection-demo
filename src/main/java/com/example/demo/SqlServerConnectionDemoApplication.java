@@ -1,5 +1,8 @@
 package com.example.demo;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import java.util.List;
+import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.CommandLineRunner;
@@ -20,13 +23,30 @@ public class SqlServerConnectionDemoApplication {
 
         @Autowired
         private JdbcTemplate jdbcTemplate;
-        
-        @Value("${db.perfil}")
-        private String perfil;
+
+        @Value("${spring.datasource.hikari.connection-test-query}")
+        String testQuery;
 
         @Override
-        public void run(String... strings) throws Exception {
-            System.out.println(jdbcTemplate.queryForList("SELECT TOP 3 * FROM " + perfil + ".PASDO001"));
+        public void run(String... args) throws Exception {
+            if (args.length == 0) {
+                throw new IllegalArgumentException("Debe haber un parametro con la query a ejecutar.");
+            }
+            long inicio = 0;
+            boolean medirEjecucion = args.length == 2 ? "true".equals(args[1]) : false;
+            if (medirEjecucion) {
+                jdbcTemplate.queryForMap(testQuery);
+                inicio = System.currentTimeMillis();
+                System.out.println("INICIO DE LA CONSULTA: " + inicio);
+            }
+            List<Map<String, Object>> resultado = jdbcTemplate.queryForList(args[0]);
+            if (medirEjecucion) {
+                long fin = System.currentTimeMillis();
+                System.out.println("FIN DE LA CONSULTA: " + fin);
+                System.out.println(String.format("TIEMPO DE EJECUCION: %d ms", (fin - inicio)));
+            }
+            System.out.println("CANTIDAD DE REGISTROS: " + resultado.size());
+            System.out.println("RESULTADO: " + new ObjectMapper().writeValueAsString(resultado));
         }
     }
 
