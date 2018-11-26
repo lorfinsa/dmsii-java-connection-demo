@@ -35,11 +35,13 @@ public class SqlServerConnectionDemoApplication {
             long inicio = 0;
             boolean medirEjecucion = args.length == 2 ? "true".equals(args[1]) : false;
             if (medirEjecucion) {
-                jdbcTemplate.queryForMap(testQuery);
+                jdbcTemplate.execute(testQuery);
                 inicio = System.currentTimeMillis();
                 System.out.println("INICIO DE LA CONSULTA: " + inicio);
             }
+            
             List<Map<String, Object>> resultado = jdbcTemplate.queryForList(args[0]);
+            
             if (medirEjecucion) {
                 long fin = System.currentTimeMillis();
                 System.out.println("FIN DE LA CONSULTA: " + fin);
